@@ -1,0 +1,3 @@
+Go to Edit -> Project Settings -> Physics2D
+
+Inspector -> Min Penetration For Penalty = 0.0035;

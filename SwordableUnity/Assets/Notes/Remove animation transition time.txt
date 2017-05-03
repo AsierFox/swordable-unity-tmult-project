@@ -1,0 +1,1 @@
+Animation editor -> Select animation transition arrows & uncheck -> Has Exit Time = false;
