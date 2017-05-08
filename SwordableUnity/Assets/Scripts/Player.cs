@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
     public float speed = 50f;
     public float maxSpeed = 3;
+    
+    public float health;
+    public float maxHealth = 100;
+
     public float jumpPower = 450f;
 
     public bool grounded;
@@ -14,6 +19,7 @@ public class Player : MonoBehaviour {
 
     private Rigidbody2D rigitBody2D;
     private Animator animator;
+    private Animation animation;
 
     void Start ()
     {
@@ -21,6 +27,9 @@ public class Player : MonoBehaviour {
 
         rigitBody2D = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
+        animation = gameObject.GetComponent<Animation>();
+
+        health = maxHealth;
     }
 	
 	void Update ()
@@ -58,6 +67,9 @@ public class Player : MonoBehaviour {
         {
             rigitBody2D.velocity = new Vector2(-maxSpeed, rigitBody2D.velocity.y);
         }
+
+        // CheckLife
+        CheckLife();
     }
 
     private void FixedUpdate()
@@ -73,4 +85,33 @@ public class Player : MonoBehaviour {
             rigitBody2D.velocity = easeVelocity;
         }
     }
+
+    void CheckLife()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+            //StartCoroutine(Die());
+        }
+
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+        else if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+
+    }
+
+    //IEnumerator die()
+    //{
+    //    yield return new waitforseconds();
+    //}
 }
