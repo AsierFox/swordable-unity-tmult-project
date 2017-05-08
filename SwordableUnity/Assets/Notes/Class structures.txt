@@ -1,0 +1,15 @@
+Estructura de clases para evitar la sacoplación de código
+
+MVC
+- PlayerView (Monobehaviour) [Podría conocer la lógica, se hace un new, ya que no tiene constructor]
+- PlayerLogic [Podría conocer la data]
+- PlayerData
+
+MVVM (Mejor que MVC)
+- Presenters [Implementa interfaces]
+- ViewModel [Usa el domain model]
+- IIn
+- IOut
+- App [Implementa interfaces y usa entities]
+- DomainModel
+- Entities
