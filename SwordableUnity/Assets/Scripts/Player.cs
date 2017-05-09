@@ -67,9 +67,14 @@ public class Player : MonoBehaviour {
         {
             rigitBody2D.velocity = new Vector2(-maxSpeed, rigitBody2D.velocity.y);
         }
-
-        // CheckLife
+        
         CheckLife();
+
+        // TODO Testing dead
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Damage(5);
+        }
     }
 
     private void FixedUpdate()
@@ -88,13 +93,6 @@ public class Player : MonoBehaviour {
 
     void CheckLife()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-            //StartCoroutine(Die());
-        }
-
         if (health > maxHealth)
         {
             health = maxHealth;
@@ -105,9 +103,16 @@ public class Player : MonoBehaviour {
         }
     }
 
+    void Damage(int damageAmount)
+    {
+        health -= damageAmount;
+    }
+
     void Die()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
+        //StartCoroutine(Die());
     }
 
     //IEnumerator die()
