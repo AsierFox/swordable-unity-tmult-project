@@ -69,12 +69,6 @@ public class Player : MonoBehaviour {
         }
         
         CheckLife();
-
-        // TODO Testing dead
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Damage(5);
-        }
     }
 
     private void FixedUpdate()
@@ -103,8 +97,10 @@ public class Player : MonoBehaviour {
         }
     }
 
-    void Damage(int damageAmount)
+    public void Damage(int damageAmount)
     {
+        gameObject.GetComponent<Animation>().Play("PlayerDamaged");
+
         health -= damageAmount;
     }
 
@@ -115,8 +111,20 @@ public class Player : MonoBehaviour {
         //StartCoroutine(Die());
     }
 
-    //IEnumerator die()
-    //{
-    //    yield return new waitforseconds();
-    //}
+    public IEnumerator Knockback(float duration, float power, Vector3 direction)
+    {
+        float timer = 0;
+
+        while (duration > timer)
+        {
+            timer += Time.deltaTime;
+
+            rigitBody2D.AddForce(new Vector3(
+                direction.x * -100, // Opposite direction
+                direction.y * power, // Increase Y
+                transform.position.z)); // Don't change z coord
+        }
+
+        yield return 0;
+    }
 }

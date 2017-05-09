@@ -1,16 +1,25 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Fire : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+    public int damage = 35;
+
+    private Player player;
+
+	void Start ()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("PlayerCollider"))
+        {
+            player.Damage(damage);
+
+            StartCoroutine(player.Knockback(0.02f, 180, player.transform.position));
+        }
+    }
 }

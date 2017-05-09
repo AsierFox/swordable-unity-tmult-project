@@ -18,7 +18,12 @@ public class HUD : MonoBehaviour {
 	
 	void Update ()
     {
-        int healthSpriteIndex = (int) Mathf.Round(player.health / (100 / healthSprites.Length));
-        healthBarUI.sprite = healthSprites[healthSpriteIndex - 1];
+        int healthSpriteIndex = ( (int) Mathf.Round(player.health / (100 / healthSprites.Length)) ) - 1;
+
+        // Safe
+        if (healthSpriteIndex > -1 && healthSpriteIndex < healthSprites.Length)
+        {
+            healthBarUI.sprite = healthSprites[healthSpriteIndex];
+        }
     }
 }
