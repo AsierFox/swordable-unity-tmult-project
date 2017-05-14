@@ -26,6 +26,7 @@ public class PlayerAttack : MonoBehaviour {
 
         if (Input.GetKeyDown("f") && !attacking)
         {
+            gameObject.GetComponentInParent<Player>().PlaySound(2);
             attacking = true;
             attackTimer = attackCd;
             attackTrigger.enabled = true;

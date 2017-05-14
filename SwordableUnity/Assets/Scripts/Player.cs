@@ -15,21 +15,20 @@ public class Player : MonoBehaviour {
 
     public bool grounded;
 
-    public PlayerManager playerManager;
-
+    public AudioClip[] audioClips;
     private Rigidbody2D rigitBody2D;
     private Animator animator;
-    private Animation animation;
+    //private Animation animation;
     private GameMaster gameMaster;
+    private AudioSource audioSource;
 
     void Start ()
     {
-        playerManager = new PlayerManager(this);
-
         rigitBody2D = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
-        animation = gameObject.GetComponent<Animation>();
+        //animation = gameObject.GetComponent<Animation>();
         gameMaster = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
+        audioSource = gameObject.GetComponent<AudioSource>();
 
         health = maxHealth;
     }
@@ -54,6 +53,7 @@ public class Player : MonoBehaviour {
         // Jump
         if (grounded && Input.GetButtonDown("Jump"))
         {
+            PlaySound(0);
             rigitBody2D.AddForce(Vector2.up * jumpPower);
         }
         
@@ -103,6 +103,8 @@ public class Player : MonoBehaviour {
     {
         gameObject.GetComponent<Animation>().Play("PlayerDamaged");
 
+        PlaySound(1);
+
         health -= damageAmount;
     }
 
@@ -140,5 +142,11 @@ public class Player : MonoBehaviour {
         }
 
         yield return 0;
+    }
+
+    public void PlaySound(int clip)
+    {
+        audioSource.clip = audioClips[clip];
+        audioSource.Play();
     }
 }

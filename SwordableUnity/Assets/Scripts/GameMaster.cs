@@ -8,6 +8,7 @@ public class GameMaster : MonoBehaviour {
     public int score = 0;
 
     public Text scoreText;
+    public Text inputinfoText;
 
     private void Update()
     {

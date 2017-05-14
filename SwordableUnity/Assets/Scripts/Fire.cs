@@ -27,6 +27,6 @@ public class Fire : MonoBehaviour {
 
     public void Damaged(int damage)
     {
-        Debug.Log("Attacked!");
+        Destroy(transform.parent.gameObject);
     }
 }
