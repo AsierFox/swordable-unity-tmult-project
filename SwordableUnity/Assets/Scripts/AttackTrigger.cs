@@ -8,10 +8,10 @@ public class AttackTrigger : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.isTrigger && collision.CompareTag("Enemy"))
+        if (collision.isTrigger && collision.CompareTag("Attackable"))
         {
             // Call to method Damage
-            collision.SendMessageUpwards("Damage", damage);
+            collision.SendMessageUpwards("Damaged", damage);
         }
     }
 }

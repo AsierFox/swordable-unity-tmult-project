@@ -6,6 +6,8 @@ public class Fire : MonoBehaviour {
 
     public int damage = 35;
 
+    public int knobackPower = 80;
+
     private Player player;
 
 	void Start ()
@@ -19,7 +21,12 @@ public class Fire : MonoBehaviour {
         {
             player.Damage(damage);
 
-            StartCoroutine(player.Knockback(0.02f, 180, player.transform.position));
+            StartCoroutine(player.Knockback(0.02f, knobackPower, player.transform.position));
         }
+    }
+
+    public void Damaged(int damage)
+    {
+        Debug.Log("Attacked!");
     }
 }

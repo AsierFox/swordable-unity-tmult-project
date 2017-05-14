@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
     private Rigidbody2D rigitBody2D;
     private Animator animator;
     private Animation animation;
+    private GameMaster gameMaster;
 
     void Start ()
     {
@@ -28,6 +29,7 @@ public class Player : MonoBehaviour {
         rigitBody2D = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
         animation = gameObject.GetComponent<Animation>();
+        gameMaster = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
 
         health = maxHealth;
     }
@@ -111,9 +113,21 @@ public class Player : MonoBehaviour {
         //StartCoroutine(Die());
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Scorable"))
+        {
+            Destroy(collision.gameObject);
+            gameMaster.score++;
+        }
+    }
+
     public IEnumerator Knockback(float duration, float power, Vector3 direction)
     {
         float timer = 0;
+
+        // To fix the inconsistency of knockback
+        rigitBody2D.velocity = new Vector2(rigitBody2D.velocity.x, 0);
 
         while (duration > timer)
         {
