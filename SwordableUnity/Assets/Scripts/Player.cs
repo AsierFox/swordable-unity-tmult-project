@@ -59,7 +59,7 @@ public class Player : MonoBehaviour {
         
         // Move
         rigitBody2D.AddForce((Vector2.right * speed) * Input.GetAxis("Horizontal"));
-
+        
         // Control maxSpeed
         if (rigitBody2D.velocity.x > maxSpeed)
         {
