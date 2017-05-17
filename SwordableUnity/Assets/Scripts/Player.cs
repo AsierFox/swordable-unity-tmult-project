@@ -119,6 +119,7 @@ public class Player : MonoBehaviour {
     {
         if (collision.CompareTag("Scorable"))
         {
+            PlaySound(3);
             Destroy(collision.gameObject);
             gameMaster.score++;
         }
@@ -136,7 +137,7 @@ public class Player : MonoBehaviour {
             timer += Time.deltaTime;
 
             rigitBody2D.AddForce(new Vector3(
-                direction.x * -100, // Opposite direction
+                direction.x * -1, // Opposite direction
                 direction.y * power, // Increase Y
                 transform.position.z)); // Don't change z coord
         }

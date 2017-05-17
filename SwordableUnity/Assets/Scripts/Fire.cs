@@ -21,7 +21,7 @@ public class Fire : MonoBehaviour {
         {
             player.Damage(damage);
 
-            StartCoroutine(player.Knockback(0.02f, knobackPower, player.transform.position));
+            StartCoroutine(player.Knockback(0.001f, knobackPower, player.transform.position));
         }
     }
 
